@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:html';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:flutterapps/modelos/pokemon.dart';
+import 'package:http/http.dart';
 
 void main() {
   runApp(webFlutter());
@@ -12,21 +15,71 @@ class webFlutter extends StatefulWidget {
 }
 
 class _webFlutterState extends State<webFlutter> {
+  Future<List<pokemon>> Listadopokemon;
+
+  Future<List<pokemon>> getpokemon() async {
+    final Response = await http.get(Uri.parse(
+        "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"));
+    String cuerpo;
+    List<pokemon> lista = [];
+    if (Response.statusCode == 200) {
+      print(Response.body);
+      cuerpo = utf8.decode(Response.bodyBytes);
+      final jsonData = jsonDecode(cuerpo);
+      for (var item in jsonData["pokemon"]) {
+        lista.add(pokemon(item[num], item["name"], item["img"]));
+      }
+    } else {
+      throw Exception("falla en la conexion estatus 500");
+    }
+    return lista;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Listadopokemon = getpokemon();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var futereBuilder = FutureBuilder(
+        future: Listadopokemon,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView(
+              children: Listadopokemons(snapshot.data),
+            );
+          } else {
+            print(snapshot.error);
+            return Text("Error");
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "consumo webservice",
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("webservice flutter"),
-        ),
-        body: Center(
-          child: Container(
-            child: Text("cuerpo de la aplicacion"),
+          appBar: AppBar(
+            title: Text("webservice flutter"),
           ),
-        ),
-      ),
+          body: futereBuilder),
     );
+  }
+
+  List<Widget> Listadopokemons(data) {
+    List<Widget> poke = [];
+    for (var item in data) {
+      poke.add(Card(
+        elevation: 2.0,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        ),
+      ));
+    }
+    return poke;
   }
 }
