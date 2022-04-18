@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:html';
+
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutterapps/modelos/pokemon.dart';
@@ -15,7 +15,7 @@ class webFlutter extends StatefulWidget {
 }
 
 class _webFlutterState extends State<webFlutter> {
-  Future<List<pokemon>> Listadopokemon;
+  late Future<List<pokemon>> _Listadopokemon;
 
   Future<List<pokemon>> getpokemon() async {
     final Response = await http.get(Uri.parse(
@@ -27,7 +27,7 @@ class _webFlutterState extends State<webFlutter> {
       cuerpo = utf8.decode(Response.bodyBytes);
       final jsonData = jsonDecode(cuerpo);
       for (var item in jsonData["pokemon"]) {
-        lista.add(pokemon(item[num], item["name"], item["img"]));
+        lista.add(pokemon(item["name"], item["img"]));
       }
     } else {
       throw Exception("falla en la conexion estatus 500");
@@ -38,13 +38,13 @@ class _webFlutterState extends State<webFlutter> {
   @override
   void initState() {
     super.initState();
-    Listadopokemon = getpokemon();
+    _Listadopokemon = getpokemon();
   }
 
   @override
   Widget build(BuildContext context) {
     var futereBuilder = FutureBuilder(
-        future: Listadopokemon,
+        future: _Listadopokemon,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView(
@@ -71,13 +71,25 @@ class _webFlutterState extends State<webFlutter> {
 
   List<Widget> Listadopokemons(data) {
     List<Widget> poke = [];
-    for (var item in data) {
+    for (var itempk in data) {
       poke.add(Card(
         elevation: 2.0,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        ),
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              // Text(itempk.num),
+              Container(
+                padding: EdgeInsets.all(2.0),
+                height: 500,
+                width: 100,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(itempk.img), scale: 0.05),
+                ),
+              ),
+              Text(itempk.name),
+            ]),
       ));
     }
     return poke;
