@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 
-class pokemon {
-  String name = "";
-  String img = "";
+class photos {
+  int albumId = 0;
+  int id = 0;
+  String title = "";
+  String url = "";
+  String thumbnailUrl = "";
 
-  pokemon(name, img) {
-    this.name = name;
-    this.img = img;
+  photos(
+    dynamic albumId,
+    dynamic id,
+    dynamic title,
+    dynamic url,
+    dynamic thumbnailUrl,
+  ) {
+    this.albumId = albumId;
+    this.id = id;
+    this.title = title;
+    this.url = url;
+    this.thumbnailUrl = thumbnailUrl;
   }
 }

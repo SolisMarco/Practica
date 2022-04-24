@@ -15,19 +15,22 @@ class webFlutter extends StatefulWidget {
 }
 
 class _webFlutterState extends State<webFlutter> {
-  late Future<List<pokemon>> _Listadopokemon;
+  late Future<List<photos>> _Listadopokemon;
 
-  Future<List<pokemon>> getpokemon() async {
-    final Response = await http.get(Uri.parse(
-        "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"));
+  get dinamic => null;
+
+  Future<List<photos>> getpokemon() async {
+    final Response = await http
+        .get(Uri.parse("https://jsonplaceholder.typicode.com/photos"));
     String cuerpo;
-    List<pokemon> lista = [];
+    List<photos> lista = [];
     if (Response.statusCode == 200) {
       print(Response.body);
       cuerpo = utf8.decode(Response.bodyBytes);
       final jsonData = jsonDecode(cuerpo);
-      for (var item in jsonData["pokemon"]) {
-        lista.add(pokemon(item["name"], item["img"]));
+      for (var item in jsonData["photos"]) {
+        lista.add(photos(item["albumId"], item["id"], item["title"],
+            item["url"], item["thumbnailUrl"]));
       }
     } else {
       throw Exception("falla en la conexion estatus 500");
