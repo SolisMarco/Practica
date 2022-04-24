@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutterapps/modelos/pokemon.dart';
-import 'package:http/http.dart';
 
 void main() {
   runApp(webFlutter());
@@ -15,22 +14,21 @@ class webFlutter extends StatefulWidget {
 }
 
 class _webFlutterState extends State<webFlutter> {
-  late Future<List<photos>> _Listadopokemon;
+  late Future<List<resultado>> _Listadopokemon;
 
   get dinamic => null;
 
-  Future<List<photos>> getpokemon() async {
-    final Response = await http
-        .get(Uri.parse("https://jsonplaceholder.typicode.com/photos"));
+  Future<List<resultado>> getpokemon() async {
+    final Response =
+        await http.get(Uri.parse("https://swapi.dev/api/starships"));
     String cuerpo;
-    List<photos> lista = [];
+    List<resultado> lista = [];
     if (Response.statusCode == 200) {
       print(Response.body);
       cuerpo = utf8.decode(Response.bodyBytes);
       final jsonData = jsonDecode(cuerpo);
       for (var item in jsonData["photos"]) {
-        lista.add(photos(item["albumId"], item["id"], item["title"],
-            item["url"], item["thumbnailUrl"]));
+        lista.add(resultado(item["name"], item["model"]));
       }
     } else {
       throw Exception("falla en la conexion estatus 500");
@@ -66,7 +64,7 @@ class _webFlutterState extends State<webFlutter> {
       title: "consumo webservice",
       home: Scaffold(
           appBar: AppBar(
-            title: Text("webservice flutter"),
+            title: Text("STAR WARS NAVES"),
           ),
           body: futereBuilder),
     );
