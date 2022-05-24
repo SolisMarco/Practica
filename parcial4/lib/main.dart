@@ -16,7 +16,7 @@ class FlutterMaps extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MapMultiMarker(),
+      home: PrincipalPage(),
     );
   }
 }
