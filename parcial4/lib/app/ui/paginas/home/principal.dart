@@ -23,7 +23,7 @@ class _MapMultiMarkerState extends State<MapMultiMarker> {
       "address": "Servidor web 01",
       "id": "Servidor_02",
       "image":
-          "https://upload.wikimedia.org/wikipedia/commons/9/96/Delhi_Red_fort.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Monumento_al_Salvador_del_Mundo_1.jpg/800px-Monumento_al_Salvador_del_Mundo_1.jpg",
       "lat": 13.7013266,
       "lng": -89.2266226,
       "name": "Salvador del Mundo",
@@ -34,7 +34,7 @@ class _MapMultiMarkerState extends State<MapMultiMarker> {
       "address": "Servidor Web 02",
       "id": "Servidor_03",
       "image":
-          "https://upload.wikimedia.org/wikipedia/commons/7/7e/Mumbai_Taj.JPG",
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Soyapango1.jpg/800px-Soyapango1.jpg",
       "lat": 13.7104475,
       "lng": -89.1785714,
       "name": "Soyapango",
@@ -45,7 +45,7 @@ class _MapMultiMarkerState extends State<MapMultiMarker> {
       "address": "Servidor web 03",
       "id": "Servidor_04",
       "image":
-          "https://upload.wikimedia.org/wikipedia/commons/6/6f/Evening_view%2C_City_Palace%2C_Udaipur.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Plaza_mayor_San_Jacinto.jpg/800px-Plaza_mayor_San_Jacinto.jpg?20141007172233",
       "lat": 13.6860819,
       "lng": -89.1894334,
       "name": "San Jacinto",
@@ -56,7 +56,7 @@ class _MapMultiMarkerState extends State<MapMultiMarker> {
       "address": "Data center",
       "id": "servidor_05",
       "image":
-          "https://upload.wikimedia.org/wikipedia/commons/6/6f/Evening_view%2C_City_Palace%2C_Udaipur.jpg",
+          "https://www.laprensagrafica.com/__export/1579029934288/sites/prensagrafica/img/2020/01/14/img_4191_1_crop1579029916928.jpg_525981578.jpg",
       "lat": 13.7025885,
       "lng": -89.2229604,
       "name": "Utec",
