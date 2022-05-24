@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapMultiMarker extends StatefulWidget {
+class PrincipalPage extends StatefulWidget {
   @override
-  State<MapMultiMarker> createState() => _MapMultiMarkerState();
+  State<PrincipalPage> createState() => _PrincipalPageState();
 }
 
-class _MapMultiMarkerState extends State<MapMultiMarker> {
+class _PrincipalPageState extends State<PrincipalPage> {
   final List<Map<String, dynamic>> clityList = const [
     {
       "address": "Cede Central",
